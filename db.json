@@ -1,0 +1,18 @@
+{
+    "transactions": [
+      {
+        "id": 1,
+        "amount": 500,
+        "category": "Salary",
+        "type": "income",
+        "date": "2025-03-01"
+      },
+      {
+        "id": 3,
+        "amount": 100,
+        "category": "Transport",
+        "type": "expense",
+        "date": "2025-03-03"
+      }
+    ]
+  }
