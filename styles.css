@@ -59,3 +59,27 @@ nav a:hover {
 nav a.active {
     background-color: rgba(255, 255, 255, 0.2);
 }
+
+/* Dashboard Section */
+.summary {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 30%;
+}
+
+.income {
+    border-left: 5px solid green;
+}
+
+.expense {
+    border-left: 5px solid red;
+}
