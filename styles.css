@@ -122,3 +122,18 @@ th {
 #add-transaction-btn:hover {
     background-color: #0056b3;
 }
+
+/* Footer Styles */
+footer {
+    background-color: #0b6af8;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
