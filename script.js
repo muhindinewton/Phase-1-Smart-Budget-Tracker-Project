@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const transactionForm = document.getElementById("add-transaction-form");
     const transactionList = document.getElementById("recent-transactions");
     const totalBalance = document.getElementById("total-balance");
     const totalIncome = document.getElementById("total-income");
@@ -112,6 +113,34 @@ document.addEventListener("DOMContentLoaded", () => {
         totalExpense.textContent = `$${expense.toFixed(2)}`;
         totalBalance.textContent = `$${(income - expense).toFixed(2)}`;
     }
+
+    // Handle Transaction Submission
+    transactionForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const amount = document.getElementById("amount").value;
+        const category = document.getElementById("category").value;
+        const type = document.getElementById("type").value;
+        const date = document.getElementById("date").value;
+        const newTransaction = { amount, category, type, date };
+        fetch("http://localhost:3000/transactions", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newTransaction)
+        })
+        .then(() => {
+            fetchTransactions();
+            addTransactionFormSection.style.display = "none";  // Hide the form after submission
+            transactionForm.reset();
+        });
+    });
+
+    // Delete a transaction
+    window.deleteTransaction = (id) => {
+        fetch(`http://localhost:3000/transactions/${id}`, {
+            method: "DELETE"
+        })
+        .then(() => fetchTransactions());
+    };
 
     // Initially load the transactions
     fetchTransactions();
