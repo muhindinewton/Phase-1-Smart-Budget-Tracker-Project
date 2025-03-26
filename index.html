@@ -88,6 +88,21 @@
             </table>
 
     </section>
+
+    <!-- Add Transaction Form (hidden by default) -->
+    <section id="add-transaction-form-section" style="display: none;">
+        <form id="add-transaction-form">
+            <input type="number" id="amount" placeholder="Amount" required>
+            <input type="text" id="category" placeholder="Category" required>
+            <select id="type" required>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+            <input type="date" id="date" required>
+            <button type="submit">Add Transaction</button>
+            <button type="button" id="cancel-btn">Cancel</button>
+        </form>
+    </section>
     
     <!-- Footer -->
     <footer>

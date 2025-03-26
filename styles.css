@@ -123,6 +123,42 @@ th {
     background-color: #0056b3;
 }
 
+/* Form Styles */
+#add-transaction-form-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#add-transaction-form {
+    display: inline-block;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#add-transaction-form input,
+#add-transaction-form select {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#add-transaction-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-transaction-form button:hover {
+    background-color: #0056b3;
+}
+
 /* Footer Styles */
 footer {
     background-color: #0b6af8;

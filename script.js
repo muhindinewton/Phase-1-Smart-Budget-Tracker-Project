@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalBalance = document.getElementById("total-balance");
     const totalIncome = document.getElementById("total-income");
     const totalExpense = document.getElementById("total-expense");
+    const addTransactionBtn = document.getElementById("add-transaction-btn");
+    const addTransactionFormSection = document.getElementById("add-transaction-form-section");
+    const cancelBtn = document.getElementById("cancel-btn");
     const transactionsPage = document.getElementById("transactions");
     const transactionsLink = document.getElementById("transactions-link");
     const homeLink = document.getElementById("home-link");
@@ -11,6 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const incomeTransactionList = document.getElementById("income-transaction-list");
     const expenseTransactionList = document.getElementById("expense-transaction-list");
 
+    // Show the Add Transaction form when the button is clicked
+    addTransactionBtn.addEventListener("click", () => {
+        addTransactionFormSection.style.display = "block";  // Show the form
+    });
+    
+    // Cancel the form and hide it
+    cancelBtn.addEventListener("click", () => {
+        addTransactionFormSection.style.display = "none";  // Hide the form
+    });
+    
+    
     // Show transactions page and hide home page
     transactionsLink.addEventListener("click", () => {
         transactionsPage.style.display = "block";
