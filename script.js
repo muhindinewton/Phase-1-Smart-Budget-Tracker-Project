@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const transactionList = document.getElementById("recent-transactions");
     const totalBalance = document.getElementById("total-balance");
     const totalIncome = document.getElementById("total-income");
     const totalExpense = document.getElementById("total-expense");
@@ -27,13 +28,30 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             console.log("Fetched Data:", data);
-            // renderHomeTransactions(data);
+            renderHomeTransactions(data);
             renderIncomeTransactions(data);
             renderExpenseTransactions(data);
             updateSummary(data);
             // updateDistributionCharts(data);
         });
     }
+    //Render transactions
+    function renderHomeTransactions(transactions) {
+        const recentTransactions = transactions.slice(0, 10); // Only show the first 10 transactions on Home
+        transactionList.innerHTML = "";
+        recentTransactions.forEach(transaction => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${transaction.date}</td>
+                <td>${transaction.category}</td>
+                <td>$${transaction.amount}</td>
+                <td class="${transaction.type}">${transaction.type}</td>
+                <td><button onclick="deleteTransaction(${transaction.id})">Delete</button></td>
+            `;
+            transactionList.appendChild(row);
+        });
+    }
+
 
     function renderIncomeTransactions(transactions) {
         incomeTransactionList.innerHTML = "";
