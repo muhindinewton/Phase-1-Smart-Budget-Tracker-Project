@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+    // Initialize Google Charts
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(fetchTransactions);
+    
     const transactionForm = document.getElementById("add-transaction-form");
     const transactionList = document.getElementById("recent-transactions");
     const totalBalance = document.getElementById("total-balance");
@@ -25,17 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
         addTransactionFormSection.style.display = "none";  // Hide the form
     });
     
-    
-    // Show transactions page and hide home page
-    transactionsLink.addEventListener("click", () => {
-        transactionsPage.style.display = "block";
-        homePage.style.display = "none";
-    });
-    // Show home page and hide transactions page
-    homeLink.addEventListener("click", () => {
-        homePage.style.display = "block";
-        transactionsPage.style.display = "none";
-    });
 
     //Fetch transactions from Database
     function fetchTransactions() {
@@ -47,9 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
             renderIncomeTransactions(data);
             renderExpenseTransactions(data);
             updateSummary(data);
-            // updateDistributionCharts(data);
+            updateDistributionCharts(data);
         });
     }
+
     //Render transactions
     function renderHomeTransactions(transactions) {
         const recentTransactions = transactions.slice(0, 10); // Only show the first 10 transactions on Home
@@ -100,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Update Summary (Total Income, Expense, Balance)
     function updateSummary(transactions) {
         let income = 0, expense = 0;
         transactions.forEach(transaction => {
@@ -112,6 +106,61 @@ document.addEventListener("DOMContentLoaded", () => {
         totalIncome.textContent = `$${income.toFixed(2)}`;
         totalExpense.textContent = `$${expense.toFixed(2)}`;
         totalBalance.textContent = `$${(income - expense).toFixed(2)}`;
+    }
+
+    // Generate Distribution Charts (Income & Expense)
+    function updateDistributionCharts(transactions) {
+        google.charts.load('current', {'packages': ['corechart']});
+        
+        setTimeout(() => {
+            // Prepare data for income distribution
+            const incomeData = transactions.filter(t => t.type === 'income');
+            const incomeCategories = {};
+            
+            incomeData.forEach(transaction => {
+                incomeCategories[transaction.category] = (incomeCategories[transaction.category] || 0) + parseFloat(transaction.amount);
+            });
+            
+            // Create income chart data
+            const incomeChartData = [['Category', 'Amount']];
+            Object.entries(incomeCategories).forEach(([category, amount]) => {
+                incomeChartData.push([category, amount]);
+            });
+            
+            // Draw income chart
+            const incomeChart = new google.visualization.PieChart(document.getElementById('income-chart'));
+            incomeChart.draw(google.visualization.arrayToDataTable(incomeChartData), {
+                title: 'Income Distribution',
+                pieSliceText: 'percentage',
+                width: '100%',
+                height: '100%',
+                tooltip: {trigger: 'focus'}
+            });
+            
+            // Prepare data for expense distribution
+            const expenseData = transactions.filter(t => t.type === 'expense');
+            const expenseCategories = {};
+            
+            expenseData.forEach(transaction => {
+                expenseCategories[transaction.category] = (expenseCategories[transaction.category] || 0) + parseFloat(transaction.amount);
+            });
+            
+            // Create expense chart data
+            const expenseChartData = [['Category', 'Amount']];
+            Object.entries(expenseCategories).forEach(([category, amount]) => {
+                expenseChartData.push([category, amount]);
+            });
+            
+            // Draw expense chart
+            const expenseChart = new google.visualization.PieChart(document.getElementById('expense-chart'));
+            expenseChart.draw(google.visualization.arrayToDataTable(expenseChartData), {
+                title: 'Expense Distribution',
+                pieSliceText: 'percentage',
+                width: '100%',
+                height: '100%',
+                tooltip: {trigger: 'focus'}
+            });
+        }, 100);
     }
 
     // Handle Transaction Submission
@@ -141,6 +190,17 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(() => fetchTransactions());
     };
+
+    // Show transactions page and hide home page
+    transactionsLink.addEventListener("click", () => {
+        transactionsPage.style.display = "block";
+        homePage.style.display = "none";
+    });
+    // Show home page and hide transactions page
+    homeLink.addEventListener("click", () => {
+        homePage.style.display = "block";
+        transactionsPage.style.display = "none";
+    });
 
     // Initially load the transactions
     fetchTransactions();
