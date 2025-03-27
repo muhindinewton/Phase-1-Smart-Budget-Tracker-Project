@@ -198,3 +198,41 @@ footer p {
     height: 100%;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem;
+        backdrop-filter: none;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .summary {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card {
+        width: 90%;
+    }
+
+    .charts-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .chart-container {
+        width: 90%;
+        height: 90vw;
+        max-height: 400px;
+    }
+}
