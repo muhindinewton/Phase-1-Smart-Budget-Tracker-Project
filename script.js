@@ -186,7 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Delete a transaction
     window.deleteTransaction = (id) => {
         fetch(`https://phase-1-smart-budget-tracker-project.onrender.com/transactions/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
         })
         .then(() => fetchTransactions());
     };
