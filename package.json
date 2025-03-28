@@ -19,5 +19,10 @@
   "homepage": "https://github.com/muhindinewton/Phase-1-Smart-Budget-Tracker-Project#readme",
   "dependencies": {
     "json-server": "^1.0.0-beta.3"
-  }
+  },
+  
+    "engines": {
+      "node": "14.x"
+    }
+  
 }
