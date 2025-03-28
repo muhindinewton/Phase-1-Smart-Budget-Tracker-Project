@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Fetch transactions from Database
     function fetchTransactions() {
-        fetch("https://phase-1-smart-budget-tracker-project.onrender.com/transactions")
+        fetch("https://smart-budget-tracker-production.up.railway.app/transactions")
         .then(response => response.json())
         .then(data => {
             console.log("Fetched Data:", data);
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const type = document.getElementById("type").value;
         const date = document.getElementById("date").value;
         const newTransaction = { amount, category, type, date };
-        fetch("https://phase-1-smart-budget-tracker-project.onrender.com/transactions", {
+        fetch("https://smart-budget-tracker-production.up.railway.app/transactions", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newTransaction)
@@ -185,9 +185,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Delete a transaction
     window.deleteTransaction = (id) => {
-        fetch(`https://phase-1-smart-budget-tracker-project.onrender.com/transactions/${id}`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
+        fetch(`https://smart-budget-tracker-production.up.railway.app/transactions/${id}`, {
+            method: "DELETE"
         })
         .then(() => fetchTransactions());
     };
