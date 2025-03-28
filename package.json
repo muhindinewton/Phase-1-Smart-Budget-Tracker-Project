@@ -16,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/muhindinewton/Phase-1-Smart-Budget-Tracker-Project/issues"
   },
-  "homepage": "https://github.com/muhindinewton/Phase-1-Smart-Budget-Tracker-Project#readme",
-  "engines": {
-    "node": "14.x"
-  }
+  "homepage": "https://github.com/muhindinewton/Phase-1-Smart-Budget-Tracker-Project#readme"
 }
