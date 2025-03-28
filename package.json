@@ -4,7 +4,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "start": "json-server --watch db.json --port 3000"
+    "start": "npx live-server"
   },
   "repository": {
     "type": "git",
@@ -17,12 +17,7 @@
     "url": "https://github.com/muhindinewton/Phase-1-Smart-Budget-Tracker-Project/issues"
   },
   "homepage": "https://github.com/muhindinewton/Phase-1-Smart-Budget-Tracker-Project#readme",
-  "dependencies": {
-    "json-server": "^1.0.0-beta.3"
-  },
-  
-    "engines": {
-      "node": "14.x"
-    }
-  
+  "engines": {
+    "node": "14.x"
+  }
 }
