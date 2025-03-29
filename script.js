@@ -43,22 +43,43 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    //Render transactions
-    function renderHomeTransactions(transactions) {
-        const recentTransactions = transactions.slice(0, 10); // Only show the first 10 transactions on Home
-        transactionList.innerHTML = "";
-        recentTransactions.forEach(transaction => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${transaction.date}</td>
-                <td>${transaction.category}</td>
-                <td>$${transaction.amount}</td>
-                <td class="${transaction.type}">${transaction.type}</td>
-                <td><button onclick="deleteTransaction(${transaction.id})">Delete</button></td>
-            `;
-            transactionList.appendChild(row);
-        });
+// Render transactions with error checking
+function renderHomeTransactions(transactions) {
+    if (!Array.isArray(transactions)) {
+        console.error("Error: Expected an array of transactions but got:", transactions);
+        alert("Failed to load transactions. Please try again.");
+        return;
     }
+
+    if (!transactionList) {
+        console.error("Error: transactionList is not defined or found in the DOM.");
+        return;
+    }
+
+    const recentTransactions = transactions.slice(0, 10); // Only show the first 10 transactions on Home
+    transactionList.innerHTML = "";
+
+    recentTransactions.forEach(transaction => {
+        if (!transaction.id) {
+            console.error("Skipping transaction due to missing ID:", transaction);
+            return; // Skip transactions without valid IDs
+        }
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${transaction.date || "N/A"}</td>
+            <td>${transaction.category || "Uncategorized"}</td>
+            <td>$${transaction.amount || "0.00"}</td>
+            <td class="${transaction.type || "unknown"}">${transaction.type || "Unknown"}</td>
+            <td><button onclick="deleteTransaction('${transaction.id}')">Delete</button></td>
+        `;
+
+        transactionList.appendChild(row);
+    });
+
+    console.log("Successfully rendered", recentTransactions.length, "transactions.");
+}
+
 
 
     function renderIncomeTransactions(transactions) {
