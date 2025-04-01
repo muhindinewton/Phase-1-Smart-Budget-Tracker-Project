@@ -8,7 +8,7 @@ Smart Budget Tracker is a user-friendly budgeting Single Page Application (SPA) 
 
 - **Navigation Bar:** Minimalist design with links to Home and Transactions.
 - **Dashboard (Home Page):** Displays total balance, income, expenses, and a summary of the last few transactions. Includes a button to add a new transaction.
-- **Transactions Page:** Lists all transactions with details such as date, category, amount, and type (Income/Expense). Features a filter/search bar and edit/delete buttons.
+- **Transactions Page:** Lists all transactions with details such as date, category, amount, and type (Income/Expense). Features a delete button for transactions.
 - **Add/delete Transaction Form:**
   - Fields: Amount, Category (Food, Transport, Bills, etc.), Type (Income/Expense), Date, and Description.
   - Submit and cancel buttons.
